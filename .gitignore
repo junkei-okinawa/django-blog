@@ -21,3 +21,6 @@ venv
 # for app files
 **__pycache__**
 content
+
+# for django
+blog/migrations
