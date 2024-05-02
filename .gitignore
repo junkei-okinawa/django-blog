@@ -13,9 +13,11 @@ venv
 .env.development.local
 .env.test
 .env.production
-
-content
 .env
 
 # for sqlite
 *.sqlite**
+
+# for app files
+**__pycache__**
+content
