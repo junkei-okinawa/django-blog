@@ -1,0 +1,74 @@
+<!-- blog/templates/blog/index.html -->
+
+{% extends "base.html" %}
+
+{% block page_title %}
+<h2>Blog Posts</h2>
+{% endblock page_title %}
+
+{% block page_content %}
+{% block posts %}
+{% for post in posts %}
+<h3><a href="{% url 'blog_detail' post.pk %}">{{ post.title }}</a></h3>
+<small>
+  {{ post.created_on.date }} | Categories:
+  {% for category in post.categories.all %}
+  <a href="{% url 'blog_category' category.name %}">
+    {{ category.name }}
+  </a>
+  {% endfor %}
+</small>
+<p class="markdown">{{ post.body | slice:":400" }}...</p>
+{% endfor %}
+{% endblock posts %}
+<script>
+  window.onload = function () {
+    // change size for emoji
+    document.querySelectorAll(".emoji").forEach(elm => elm.style = "height: 1.5em;");
+
+    // change color styles
+    /* settings from models.py
+    body_bg = models.CharField("ボディ背景", max_length=50, default="white")
+    body_text = models.CharField("ボディテキスト", max_length=50, default="black")
+    title_bg = models.CharField("タイトル背景", max_length=50, default="lightgray")
+    title_text = models.CharField("タイトルテキスト", max_length=50, default="black")
+    link_text = models.CharField("リンクテキスト", max_length=50, default="blue")
+    head_bg = models.CharField("ヘッダー背景", max_length=50, default="lightgray")
+    head_text = models.CharField("ヘッダーテキスト", max_length=50, default="black")
+    code_bg = models.CharField("コードブロック背景", max_length=50, default="black")
+    code_texxt = models.CharField("コードテキスト", max_length=50, default="white")
+    */
+    // change style for body
+    bodyStyles = "";
+    bodyStyles += "{{color.body_bg}}" === "Default" ? "" : "background: {{color.body_bg}};";
+    bodyStyles += "{{color.body_text}}" === "Default" ? "" : "color: {{color.body_text}};";
+    detailStyles = "";
+    detailStyles += "{{color.body_bg}}" === "Default" ? "" : "background-color: {{color.body_bg}};";
+    detailStyles += "{{color.body_text}}" === "Default" ? "" : "color: {{color.body_text}};";
+    if (bodyStyles) {
+      document.querySelector("body").style = bodyStyles;
+      document.querySelectorAll("details").forEach(elm => elm.style = detailStyles);
+    }
+    // change style for blog title( not markdown aria. )
+    titleStyles = "";
+    titleStyles += "{{color.title_bg}}" === "Default" ? "" : "background: {{color.title_bg}};";
+    titleStyles += "{{color.title_text}}" === "Default" ? "" : "color: {{color.title_text}};";
+    if (titleStyles) {
+      document.querySelectorAll("body>h1").forEach(elm => elm.style = titleStyles);
+    }
+    // change color for link
+    linkStyles = "";
+    linkStyles += "{{color.link_text}}" === "Default" ? "" : "color: {{color.link_text}};";
+    if (linkStyles) {
+      document.querySelectorAll("a").forEach(elm => elm.style = linkStyles);
+    }
+    // change color for header
+    headerStyles = "";
+    headerStyles += "{{color.head_bg}}" === "Default" ? "" : "background: {{color.head_bg}};";
+    headerStyles += "{{color.head_text}}" === "Default" ? "" : "color: {{color.head_text}};";
+    if (headerStyles) {
+      document.querySelectorAll(".markdown h1,h2,h3,h4,h5,h6").forEach(elm => elm.style = headerStyles);
+    }
+  }
+</script>
+{% endblock page_content %}

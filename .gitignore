@@ -1,0 +1,21 @@
+# for vscode
+**vscode**
+
+# for vercel
+.vercel
+
+# for venv
+venv
+
+# for env files
+.env.local
+.env.development
+.env.development.local
+.env.test
+.env.production
+
+content
+.env
+
+# for sqlite
+*.sqlite**
