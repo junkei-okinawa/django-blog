@@ -34,7 +34,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", ".vercel.app"]
+ALLOWED_HOSTS = str(os.environ.get("ALLOWED_HOSTS")).split(",")
 
 
 # Application definition
@@ -103,7 +103,7 @@ DATABASES = {
         "USER": os.environ.get("POSTGRES_USER"),
         "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
         "HOST": os.environ.get("POSTGRES_HOST"),
-        "PORT": "5432",
+        "PORT": os.environ.get("POSTGRES_PORT"),
     }
 }
 

@@ -9,7 +9,7 @@ urlpatterns = [
     path("", include("blog.urls")),
     # path("markdownx/", include("markdownx.urls")),
     path("mdeditor/", include("mdeditor.urls")),
-    re_path(r"^emoji/", include("emoji.urls")),
+    # re_path(r"^emoji/", include("emoji.urls")),
 ]
 
 if settings.DEBUG:
