@@ -2,14 +2,14 @@ FROM python:3.11-slim-bookworm as builder
 
 WORKDIR /app
 COPY . .
-COPY .env .env
+# COPY .env .env
 
 ENV PYTHONUSERBASE=/app/__pypackages__
 RUN pip install --user -r requirements.txt
 # create superuser. username, etc. are used from '.env'. Ignore errors if duplicate registrations occur.
 RUN python manage.py createsuperuser --noinput ; exit 0
 RUN python manage.py collectstatic --noinput
-RUN rm -rf .env
+# RUN rm -rf .env
 
 # FROM gcr.io/distroless/python3-debian12:debug
 FROM gcr.io/distroless/python3-debian12
