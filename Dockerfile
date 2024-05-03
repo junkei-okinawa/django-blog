@@ -7,7 +7,7 @@ COPY . .
 ENV PYTHONUSERBASE=/app/__pypackages__
 RUN pip install --user -r requirements.txt
 # create superuser. username, etc. are used from '.env'. Ignore errors if duplicate registrations occur.
-RUN python manage.py createsuperuser --noinput ; exit 0
+# RUN python manage.py createsuperuser --noinput ; exit 0
 RUN python manage.py collectstatic --noinput
 # RUN rm -rf .env
 
