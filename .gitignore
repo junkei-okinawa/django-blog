@@ -24,3 +24,6 @@ content
 
 # for django
 blog/migrations
+
+# for Google cloud storage
+secret
